@@ -4,25 +4,14 @@
     {
         public static void Main(string[] args)
         {
-            //Console.WriteLine("Welcome to Mood Analyser Problem's solution Master Branch.");
-
-            string message = "I am happy";
-
-            AnalyzeMood(message);
-        }
-
-        public static void AnalyzeMood(string message)
-        {
-            string happy = "I am happy";
-            string sad = "I am sad";
-
-            if (message == happy)
+            try
             {
-                Console.WriteLine("Mood: Happy");
+                Analyzemood mood = new Analyzemood("");
+                mood.Analyze();
             }
-            else if (message == sad)
+            catch (ArgumentException ex)
             {
-                Console.WriteLine("Mood: Sad");
+                Console.WriteLine(ex.Message);
             }
         }
     }
