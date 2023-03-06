@@ -8,6 +8,7 @@ namespace MoodAnalyser
 {
     public class Analyzemood
     {
+
         public string message;
         public string happy = "I am happy";
         public string sad = "I am sad";
@@ -17,7 +18,7 @@ namespace MoodAnalyser
         {
             if (string.IsNullOrEmpty(message))
             {
-                throw new ArgumentException("No message was passed");
+                throw new Moodanalysisexc("Exception Raised: No message was passed.");
             }
             this.message = message;
         }
@@ -33,5 +34,6 @@ namespace MoodAnalyser
                 Console.WriteLine("Mood: Sad");
             }
         }
+
     }
 }

@@ -6,7 +6,7 @@
         {
             try
             {
-                Analyzemood mood = new Analyzemood("");
+                Analyzemood mood = new Analyzemood("I am happy");
                 mood.Analyze();
             }
             catch (ArgumentException ex)
