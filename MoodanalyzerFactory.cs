@@ -33,5 +33,12 @@ namespace MoodAnalyser
             MethodInfo analyzeMoodMethod = type.GetMethod("AnalyzeMood");
             return (string)analyzeMoodMethod.Invoke(moodAnalyzer, null);
         }
+
+        public static void ModifyMessage(string message, Moodanalyzer moodAnalyzer)
+        {
+            Type type = moodAnalyzer.GetType();
+            PropertyInfo propertyInfo = type.GetProperty("message");
+            propertyInfo.SetValue(moodAnalyzer, message);
+        }
     }
 }
