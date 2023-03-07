@@ -8,31 +8,34 @@ namespace MoodAnalyser
 {
     public class Analyzemood
     {
-
         public string message;
         public string happy = "I am happy";
         public string sad = "I am sad";
-
+        public Analyzemood()
+        {
+            // Default constructor
+        }
 
         public Analyzemood(string message)
         {
             if (string.IsNullOrEmpty(message))
             {
-                throw new Moodanalysisexc("Exception Raised: No message was passed.");
+                throw new Moodanalysisexc("Exception Raised: No message was passed to determine user's mood!");
             }
             this.message = message;
         }
 
-        public void Analyze()
+        public string Analyze(string message)
         {
             if (this.message == happy)
             {
-                Console.WriteLine("Mood: Happy");
+                return "Happy";
             }
             else if (this.message == sad)
             {
-                Console.WriteLine("Mood: Sad");
+                return "Sad";
             }
+            return "Happy";
         }
 
     }

@@ -6,10 +6,10 @@
         {
             try
             {
-                Analyzemood mood = new Analyzemood("I am happy");
-                mood.Analyze();
+                Analyzemood mood = MoodanalyzerFactory.CreateMoodAnalyzer();
+                Console.WriteLine(mood.Analyze(""));
             }
-            catch (ArgumentException ex)
+            catch (Moodanalysisexc ex)
             {
                 Console.WriteLine(ex.Message);
             }
