@@ -6,8 +6,8 @@
         {
             try
             {
-                Analyzemood mood = MoodanalyzerFactory.CreateMoodAnalyzer();
-                Console.WriteLine(mood.Analyze(""));
+                Moodanalyzer moodAnalyzer = MoodanalyzerFactory.CreateMoodAnalyzerObject("I am sad");
+                Console.WriteLine(moodAnalyzer.AnalyzeMood());
             }
             catch (Moodanalysisexc ex)
             {

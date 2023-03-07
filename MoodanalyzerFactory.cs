@@ -3,27 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace MoodAnalyser
 {
     public class MoodanalyzerFactory
     {
-        public static Analyzemood CreateMoodAnalyzer()
-        {
-            try
+            public static Moodanalyzer CreateMoodAnalyzerObject(string message)
             {
-                Type type = Type.GetType("Day21Reflections.AnalyzeMood");
-                Analyzemood moodAnalyzer = (Analyzemood)Activator.CreateInstance(type);
-                return moodAnalyzer;
+                Type type = Type.GetType("MoodAnalyser.Moodanalyzer");
+                if (type == null)
+                {
+                    throw new Moodanalysisexc("Class not found");
+                }
+                if (!typeof(Moodanalyzer).IsAssignableFrom(type))
+                {
+                    throw new Moodanalysisexc("Given class does not inherit MoodAnalyzer class");
+                }
+                ConstructorInfo constructor = type.GetConstructor(new[] { typeof(string) });
+                object instance = constructor.Invoke(new object[] { message });
+                return (Moodanalyzer)instance;
             }
-            catch (ArgumentNullException)
-            {
-                throw new Moodanalysisexc("Exception Raised: Class not found!");
-            }
-            catch (Exception)
-            {
-                throw new Moodanalysisexc("Exception Raised: Constructor is not found!");
-            }
-        }
     }
 }
