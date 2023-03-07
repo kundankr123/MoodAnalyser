@@ -9,20 +9,29 @@ namespace MoodAnalyser
 {
     public class MoodanalyzerFactory
     {
-            public static Moodanalyzer CreateMoodAnalyzerObject(string message)
+        public static Moodanalyzer CreateMoodAnalyzerObject(string message)
+        {
+            Type type = Type.GetType("MoodAnalyser.Moodanalyzer");
+            if (type == null)
             {
-                Type type = Type.GetType("MoodAnalyser.Moodanalyzer");
-                if (type == null)
-                {
-                    throw new Moodanalysisexc("Class not found");
-                }
-                if (!typeof(Moodanalyzer).IsAssignableFrom(type))
-                {
-                    throw new Moodanalysisexc("Given class does not inherit MoodAnalyzer class");
-                }
-                ConstructorInfo constructor = type.GetConstructor(new[] { typeof(string) });
-                object instance = constructor.Invoke(new object[] { message });
-                return (Moodanalyzer)instance;
+                throw new Moodanalysisexc("Class not found");
             }
+            if (!typeof(Moodanalyzer).IsAssignableFrom(type))
+            {
+                throw new Moodanalysisexc("Given class does not inherit Moodanalyzer class");
+            }
+            ConstructorInfo constructor = type.GetConstructor(new[] { typeof(string) });
+            object instance = constructor.Invoke(new object[] { message });
+            return (Moodanalyzer)instance;
+        }
+
+
+        public static string InvokeAnalyzeMoodMethod(string message)
+        {
+            Moodanalyzer moodAnalyzer = CreateMoodAnalyzerObject(message);
+            Type type = moodAnalyzer.GetType();
+            MethodInfo analyzeMoodMethod = type.GetMethod("AnalyzeMood");
+            return (string)analyzeMoodMethod.Invoke(moodAnalyzer, null);
+        }
     }
 }
